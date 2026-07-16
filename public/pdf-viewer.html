@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ePaper Viewer</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+}
+
+.toolbar{
+    background:#0d6efd;
+    color:white;
+    padding:10px;
+    display:flex;
+    gap:10px;
+}
+
+button{
+    padding:8px 12px;
+}
+
+#pdf-container{
+    text-align:center;
+}
+
+canvas{
+    max-width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+
+<button onclick="prevPage()">⬅ Prev</button>
+
+<span id="pageInfo">Page 1</span>
+
+<button onclick="nextPage()">Next ➡</button>
+
+<button onclick="zoomIn()">➕ Zoom</button>
+
+<button onclick="zoomOut()">➖ Zoom</button>
+
+</div>
+
+<div id="pdf-container">
+<canvas id="pdf-render"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const params = new URLSearchParams(window.location.search);
+
+const pdfFile = params.get("pdf");
+
+let pdfDoc = null;
+let pageNum = 1;
+let scale = 1.5;
+
+const canvas =
+document.getElementById("pdf-render");
+
+const ctx =
+canvas.getContext("2d");
+
+function renderPage(num){
+
+pdfDoc.getPage(num).then(page=>{
+
+const viewport =
+page.getViewport({scale});
+
+canvas.height =
+viewport.height;
+
+canvas.width =
+viewport.width;
+
+page.render({
+canvasContext:ctx,
+viewport:viewport
+});
+
+document.getElementById("pageInfo").innerText =
+`Page ${num} / ${pdfDoc.numPages}`;
+
+});
+
+}
+
+function prevPage(){
+
+if(pageNum<=1) return;
+
+pageNum--;
+
+renderPage(pageNum);
+
+}
+
+function nextPage(){
+
+if(pageNum>=pdfDoc.numPages) return;
+
+pageNum++;
+
+renderPage(pageNum);
+
+}
+
+function zoomIn(){
+
+scale += 0.2;
+
+renderPage(pageNum);
+
+}
+
+function zoomOut(){
+
+if(scale<=0.6) return;
+
+scale -= 0.2;
+
+renderPage(pageNum);
+
+}
+
+pdfjsLib.getDocument(
+"/uploads/" + pdfFile
+).promise.then(pdf=>{
+
+pdfDoc = pdf;
+
+renderPage(pageNum);
+
+});
+
+</script>
+
+</body>
+</html>

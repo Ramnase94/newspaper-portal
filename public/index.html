@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Newspaper Portal</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<img src="logo.png" class="logo">
+
+
+<h1>
+📰 Digital Newspaper Portal
+</h1>
+
+
+<p>
+Lokbharti | Swabhimani Lok | Loksanskruti
+</p>
+
+
+</header>
+
+<div class="breaking-news">
+
+<marquee>
+
+🔥 BREAKING NEWS :
+Lokbharti | Swabhimani Lok | Loksanskruti Latest Editions Available Now
+
+</marquee>
+
+</div>  
+
+<div class="container">
+<h2>📢 Latest Editions</h2>
+
+<div id="latestEditions"></div>
+
+
+<h2>वर्तमानपत्र निवडा</h2>
+
+
+<div class="filter">
+
+
+<button onclick="loadNews('')">
+सर्व
+</button>
+
+
+<button onclick="loadByName('Lokbharti')">
+Lokbharti
+</button>
+
+
+<button onclick="loadByName('Swabhimani Lok')">
+Swabhimani Lok
+</button>
+
+
+<button onclick="loadByName('Loksanskruti')">
+Loksanskruti
+</button>
+
+
+</div>
+
+
+
+<h2>प्रकार निवडा</h2>
+
+
+<div class="filter">
+
+
+<button onclick="loadNews('Daily')">
+Daily
+</button>
+
+
+<button onclick="loadNews('Weekly')">
+Weekly
+</button>
+
+
+<button onclick="loadNews('Monthly')">
+Monthly
+</button>
+
+
+</div>
+
+<div class="search-box">
+
+
+<input 
+type="text"
+id="search"
+placeholder="Search Newspaper..."
+onkeyup="searchNews()">
+
+
+
+<input 
+type="date"
+id="dateSearch"
+onchange="searchDate()">
+
+
+
+</div>
+
+
+<div id="newsList"></div>
+
+
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>

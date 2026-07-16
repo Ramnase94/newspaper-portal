@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>Admin Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>Admin Login</h1>
+
+
+<input 
+type="text"
+id="username"
+placeholder="Username">
+
+
+<input 
+type="password"
+id="password"
+placeholder="Password">
+
+
+<button onclick="login()">
+Login
+</button>
+
+
+<p id="msg"></p>
+
+
+</div>
+
+
+
+<script>
+
+
+async function login(){
+
+
+let username =
+document.getElementById("username").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+
+let res =
+await fetch("/login",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+username,
+password
+
+})
+
+});
+
+
+
+let data =
+await res.json();
+
+
+
+if(data.success){
+
+
+localStorage.setItem(
+"admin",
+"true"
+);
+
+
+window.location =
+"admin.html";
+
+
+}
+
+else{
+
+
+document.getElementById("msg")
+.innerHTML =
+"❌ Wrong Username Password";
+
+
+}
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -157,7 +157,7 @@ async function loadByName(name) {
 
     data = data.filter(
         news => news.newspaper === name
-    );
+    )};
 
     let box = document.getElementById("newsList");
 

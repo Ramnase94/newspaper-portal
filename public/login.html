@@ -10,58 +10,56 @@
 </head>
 
 
+
 <body>
 
+<div class="login-page">
 
-<div class="container">
+    <div class="login-card">
 
+        <h1>📰 Newspaper Portal</h1>
 
-<h1>Admin Login</h1>
+        <div class="login-container">
 
+    <div class="login-card">
 
-<input 
-type="text"
-id="username"
-placeholder="Username">
+        <h1>📰 Newspaper Portal</h1>
 
+        <p>Admin Login</p>
 
-<input 
-type="password"
-id="password"
-placeholder="Password">
+        <input
+        type="text"
+        id="username"
+        placeholder="Username">
 
+        <input
+        type="password"
+        id="password"
+        placeholder="Password">
 
-<button onclick="login()">
-Login
-</button>
+        <button onclick="login()">
+            Login
+        </button>
 
+        <p id="msg"></p>
 
-<p id="msg"></p>
-
+    </div>
 
 </div>
 
-
-
 <script>
 
-
 async function login(){
-
 
 let username =
 document.getElementById("username").value;
 
-
 let password =
 document.getElementById("password").value;
-
-
 
 let res =
 await fetch("/login",
 {
-
 method:"POST",
 
 headers:{
@@ -69,52 +67,36 @@ headers:{
 },
 
 body:JSON.stringify({
-
 username,
 password
-
 })
-
 });
-
-
 
 let data =
 await res.json();
 
-
-
 if(data.success){
-
 
 localStorage.setItem(
 "admin",
 "true"
 );
 
-
 window.location =
 "admin.html";
 
-
 }
-
 else{
-
 
 document.getElementById("msg")
 .innerHTML =
-"❌ Wrong Username Password";
-
-
-}
-
+"❌ Wrong Username or Password";
 
 }
 
+}
 
 </script>
-
 
 </body>
 

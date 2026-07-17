@@ -1,3 +1,14 @@
+
+
+if(localStorage.getItem("admin")!="true"){
+    window.location="login.html";
+}
+
+function logout(){
+    localStorage.removeItem("admin");
+    window.location="login.html";
+}
+
 async function loadNews(category = "") {
 
     let url = "/newspapers";
@@ -10,7 +21,8 @@ async function loadNews(category = "") {
     let data = await response.json();
 
     // Latest Editions
-    let latestBox = document.getElementById("latestEditions");
+   let latestBox =
+document.getElementById("latestUploads");
 
     if (latestBox) {
 
@@ -149,84 +161,63 @@ async function loadByName(name) {
 
     let box = document.getElementById("newsList");
 
-    box.innerHTML = "";
+   box.innerHTML += `
 
-    data.forEach(news => {
+<div class="card">
 
-        box.innerHTML += `
-        <div class="card">
+    <div class="card-header">
+        📰 ${news.newspaper}
+    </div>
 
-            <h2>📰 ${news.newspaper}</h2>
+    <div class="badge">
+        ${news.category}
+    </div>
 
-            <canvas
-                id="thumb-${news.id}"
-                class="thumb">
-            </canvas>
+    <canvas
+        id="thumb-${news.id}"
+        class="thumb">
+    </canvas>
 
-            <p>Type : ${news.category}</p>
+    <p><b>RNI :</b> ${news.rni || "-"}</p>
 
-            <p>
+    <p><b>Owner :</b> ${news.owner || "-"}</p>
 
-            <p>
-RNI :
-${news.rni || "-"}
-</p>
+    <p><b>Mobile :</b> ${news.mobile || "-"}</p>
 
-<p>
-Owner :
-${news.owner || "-"}
-</p>
+    <p><b>Email :</b> ${news.email || "-"}</p>
 
-<p>
-📞 Mobile :
-<a href="tel:${news.mobile}">
-${news.mobile || "-"}
-</a>
-</p>
+    <p><b>Editor :</b> ${news.editor || "-"}</p>
 
-<p>
-📧 Email :
-<a href="mailto:${news.email}">
-${news.email || "-"}
-</a>
-</p>
+    <p><b>Publisher :</b> ${news.publisher || "-"}</p>
 
+    <p><b>Volume :</b> ${news.volume || "-"}</p>
 
+    <p><b>Issue :</b> ${news.issue || "-"}</p>
 
-            <p>
-                Date :
-                ${new Date(news.date).toLocaleDateString()}
-            </p>
+    <p>
+        <b>Date :</b>
+        ${new Date(news.date).toLocaleDateString()}
+    </p>
 
-            <a href="pdf-viewer.html?pdf=${news.pdf}" target="_blank">
-                📖 Read Newspaper
-            </a>
+    <div class="card-buttons">
 
-            <a href="/uploads/${news.pdf}" download>
-                ⬇ Download PDF
-            </a>
+        <a href="pdf-viewer.html?pdf=${news.pdf}"
+           target="_blank"
+           class="view-btn">
+           📖 Read
+        </a>
 
-            <a
-                href="https://wa.me/?text=Read%20${news.newspaper}%20Newspaper%20PDF"
-                target="_blank">
-                📲 Share WhatsApp
-            </a>
+        <a href="/uploads/${news.pdf}"
+           download
+           class="view-btn">
+           ⬇ Download
+        </a>
 
-        </div>
-        `;
+    </div>
 
-        setTimeout(() => {
+</div>
 
-            renderThumbnail(
-                news.pdf,
-                `thumb-${news.id}`
-            );
-
-        }, 100);
-
-    });
-
-}
+`;
 
 function searchNews() {
 
@@ -253,7 +244,28 @@ function searchNews() {
 
         }
 
-    });
+    });function searchNews(){
+
+let value =
+document.getElementById("search")
+.value.toLowerCase();
+
+let cards =
+document.querySelectorAll("#newsList .card");
+
+cards.forEach(card=>{
+
+let text =
+card.innerText.toLowerCase();
+
+card.style.display =
+text.includes(value)
+? "block"
+: "none";
+
+});
+
+}
 
 }
 

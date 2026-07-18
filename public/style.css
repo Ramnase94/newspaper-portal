@@ -1,3 +1,6 @@
+
+/*===admin panel code===*/
+/*===Admin.html===*/
 *{
     margin:0;
     padding:0;
@@ -120,7 +123,7 @@ body{
 }
 
 .box{
-    background:linear-gradient(135deg,#198754,#146c43);
+    background:linear-gradient(35deg,#198754,#146c43);
     color:white;
     text-align:center;
     padding:25px;
@@ -133,6 +136,7 @@ body{
 }
 
 .box h3{
+    color: rgb(242, 17, 17);
     margin-bottom:15px;
 }
 
@@ -157,9 +161,10 @@ body{
 /* Section Title */
 
 .section-title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align:center;
     font-size:36px;
-    color:#111827;
+    color:#b5ccff;
     margin:40px 0 25px;
 }
 
@@ -173,7 +178,7 @@ body{
     max-width:1200px;
     margin:30px auto;
 
-    background:white;
+    background:rgb(224, 184, 184);
     padding:35px;
     border-radius:20px;
     box-shadow:0 8px 20px rgba(0,0,0,.10);
@@ -274,11 +279,12 @@ body{
 }
 
 .view-btn{
+   
     flex:1;
     text-align:center;
-    background:#2563eb;
+    background:#084fea;
     color:white;
-    padding:12px;
+    padding:22px;
     border-radius:10px;
     text-decoration:none;
 }
@@ -324,9 +330,404 @@ body{
     padding:0;
 }
 
-/*
+
 .form-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:20px;
-}*/
+}
+
+#ho{
+    color: #146c43;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*===index.html code===*/
+/* Newspaper Cards */
+/* ===== INDEX PAGE FIX ===== */
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #1e3a8a 50%,
+        #2563eb 100%
+    );
+    min-height:100vh;
+}
+.header{
+    background:linear-gradient(135deg,#0d6efd,#0b5ed7);
+    color:white;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.header h1{
+    color:#ff0f0f;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.header p{
+    color: #f4fbffbb;
+    font-size:18px;
+    opacity:0.9;
+}
+
+/* Breaking News */
+
+.breaking-news{
+    background:#ff0808;
+    color:white;
+    padding:12px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+
+
+
+
+
+
+
+
+
+.container{
+    background-color: rgb(186, 234, 236);
+    max-width:1200px;
+    margin:30px auto;
+    padding:20px;
+    width:100%;
+}
+
+
+.container h2{
+    color:#fa2a01;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.filter{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:25px 0;
+}
+
+.filter button{
+    background:#f00a0a;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.filter button:hover{
+    background:#1d4ed8;
+    transform:translateY(-3px);
+}
+
+.search-box{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin:30px 0;
+}
+
+.search-box input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+#newsList{
+    color: rgb(255, 17, 17);
+    font-weight: 500;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(350px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:#f0ffa7bb;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+.card h2{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:10px;
+    padding:12px 18px;
+    background:#2a110f;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.card a:hover{
+    background:#1d4ed8;
+}
+
+#latestEditions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+@media(max-width:768px){
+
+    #newsList{
+        grid-template-columns:1fr;
+    }
+
+    #latestEditions{
+        grid-template-columns:1fr;
+    }
+
+    .search-box{
+        flex-direction:column;
+        align-items:center;
+    }
+}
+
+
+
+/* ====LOGIN PAGE===*/
+/*===index.login===*/
+
+.login-wrapper{
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(
+135deg,
+#0f172a,
+#1e3a8a,
+#2563eb
+);
+
+padding:20px;
+
+}
+
+.login-box{
+
+width:420px;
+
+background:white;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.25);
+
+text-align:center;
+
+}
+
+.logo-area img{
+
+width:90px;
+height:90px;
+
+object-fit:contain;
+
+margin-bottom:15px;
+
+}
+
+.logo-area h1{
+
+font-size:28px;
+
+color:#111827;
+
+margin-bottom:10px;
+
+}
+
+.logo-area p{
+
+color:#6b7280;
+
+margin-bottom:30px;
+
+}
+
+.input-group{
+
+margin-bottom:18px;
+
+}
+
+.input-group input{
+
+width:100%;
+
+padding:15px;
+
+border:1px solid #d1d5db;
+
+border-radius:12px;
+
+font-size:16px;
+
+}
+
+.input-group input:focus{
+
+outline:none;
+
+border-color:#2563eb;
+
+box-shadow:
+0 0 10px rgba(37,99,235,.25);
+
+}
+
+.login-box button{
+
+width:100%;
+
+padding:15px;
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-box button:hover{
+
+background:#1d4ed8;
+
+transform:translateY(-2px);
+
+}
+
+#msg{
+
+margin-top:15px;
+
+font-weight:bold;
+
+color:#ef4444;
+
+}
+
+@media(max-width:600px){
+
+.login-box{
+
+width:95%;
+
+padding:25px;
+
+}
+
+.logo-area h1{
+
+font-size:22px;
+
+}
+
+}

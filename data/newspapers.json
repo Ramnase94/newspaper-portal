@@ -1,24 +1,10 @@
 [
   {
-    "id": "45670af5-d936-42b9-970d-1c16d5cd2ea9",
-    "newspaper": "Swabhimani Lok",
-    "category": "Weekly",
-    "pdf": "1784131298791-ADHAR KARAN.pdf",
-    "date": "2026-07-15T16:01:38.805Z"
-  },
-  {
     "id": "0f516e15-c805-43e9-8515-f3646ff865ca",
     "newspaper": "Loksanskruti",
     "category": "Daily",
     "pdf": "1784131339864-DBATU PROVISIONAL RAM.pdf",
     "date": "2026-07-15T16:02:19.867Z"
-  },
-  {
-    "id": "596ab4b4-ee21-4343-a06e-a5343a5bcc37",
-    "newspaper": "Lokbharti",
-    "category": "Daily",
-    "pdf": "1784131357839-siddhi voter.pdf",
-    "date": "2026-07-15T16:02:37.866Z"
   },
   {
     "id": "40077986-8198-4ca0-b5bb-fd17ba07cd5d",
@@ -382,5 +368,20 @@
     "issue": "GFS",
     "pdf": "1784210468031-Caste Validity Certificate .pdf",
     "date": "2026-07-16T14:01:08.041Z"
+  },
+  {
+    "id": "ffc75e46-dada-4610-ade0-8453a5230491",
+    "newspaper": "Swabhimani Lok",
+    "category": "Daily",
+    "rni": "2221361246543",
+    "owner": "RAM",
+    "mobile": "9422916256",
+    "email": "ramnase94@gmail.com",
+    "editor": "ram",
+    "publisher": "ram",
+    "volume": "100",
+    "issue": "100",
+    "pdf": "1784378536051-Paytm Secure Online Payment Gateway.pdf",
+    "date": "2026-07-18T12:42:16.059Z"
   }
 ]

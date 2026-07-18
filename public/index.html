@@ -14,22 +14,20 @@
 </head>
 
 
-<body>
+<body class="body">
 
 
-<header>
+<header class="header">
 
 <img src="logo.png" class="logo">
 
 
-<h1>
+<h1 >
 📰 Digital Newspaper Portal
 </h1>
 
 
-<p>
-Lokbharti | Swabhimani Lok | Loksanskruti
-</p>
+<p>Lokbharti | Swabhimani Lok | Loksanskruti</p>
 
 
 </header>
@@ -45,7 +43,7 @@ Lokbharti | Swabhimani Lok | Loksanskruti Latest Editions Available Now
 
 </div>  
 
-<div class="container">
+<div class="container"  >
 <h2>📢 Latest Editions</h2>
 
 <div id="latestEditions"></div>
@@ -106,37 +104,79 @@ Monthly
 
 <div class="search-box">
 
+<body>
 
-<input 
+<header class="header">
+
+<img src="logo.png" class="logo">
+
+<h1>📰 Digital Newspaper Portal</h1>
+
+<p>Lokbharti | Swabhimani Lok | Loksanskruti</p>
+
+</header>
+
+<div class="breaking-news">
+<marquee>
+🔥 BREAKING NEWS :
+Lokbharti | Swabhimani Lok | Loksanskruti Latest Editions Available Now
+</marquee>
+</div>
+
+<div style="max-width:1200px;margin:30px auto;padding:20px;">
+
+<!--<h2>📢 Latest Editions</h2>
+
+<div id="latestEditions"></div>
+
+<h2>वर्तमानपत्र निवडा</h2>
+
+<div class="filter">
+
+<button onclick="loadNews('')">सर्व</button>
+
+<button onclick="loadByName('Lokbharti')">Lokbharti</button>
+
+<button onclick="loadByName('Swabhimani Lok')">Swabhimani Lok</button>
+
+<button onclick="loadByName('Loksanskruti')">Loksanskruti</button>
+
+</div>
+
+<h2>प्रकार निवडा</h2>
+
+<div class="filter">
+
+<button onclick="loadNews('Daily')">Daily</button>
+
+<button onclick="loadNews('Weekly')">Weekly</button>
+
+<button onclick="loadNews('Monthly')">Monthly</button>
+
+</div>-->
+
+<div class="search-box">
+
+<input
 type="text"
 id="search"
 placeholder="Search Newspaper..."
 onkeyup="searchNews()">
 
-
-
-<input 
+<input
 type="date"
 id="dateSearch"
 onchange="searchDate()">
 
-
-
 </div>
-
 
 <div id="newsList"></div>
 
-
-
 </div>
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script src="app.js"></script>
-
 
 </body>
 

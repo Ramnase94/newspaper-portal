@@ -2,43 +2,42 @@
 <html lang="en">
 
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Login</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
-
 <body>
 
-<div class="login-page">
+<div class="login-wrapper">
 
-    <div class="login-card">
+    <div class="login-box">
 
-        <h1>📰 Newspaper Portal</h1>
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo">
+            <h1>Digital Newspaper Portal</h1>
+            <p>Administrator Login</p>
+        </div>
 
-        <div class="login-container">
+        <div class="input-group">
+            <input
+            type="text"
+            id="username"
+            placeholder="👤 Username">
+        </div>
 
-    <div class="login-card">
-
-        <h1>📰 Newspaper Portal</h1>
-
-        <p>Admin Login</p>
-
-        <input
-        type="text"
-        id="username"
-        placeholder="Username">
-
-        <input
-        type="password"
-        id="password"
-        placeholder="Password">
+        <div class="input-group">
+            <input
+            type="password"
+            id="password"
+            placeholder="🔒 Password">
+        </div>
 
         <button onclick="login()">
-            Login
+            LOGIN
         </button>
 
         <p id="msg"></p>
@@ -57,23 +56,18 @@ document.getElementById("username").value;
 let password =
 document.getElementById("password").value;
 
-let res =
-await fetch("/login",
-{
+let res = await fetch("/login",{
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify({
 username,
 password
 })
 });
 
-let data =
-await res.json();
+let data = await res.json();
 
 if(data.success){
 
@@ -85,11 +79,9 @@ localStorage.setItem(
 window.location =
 "admin.html";
 
-}
-else{
+}else{
 
-document.getElementById("msg")
-.innerHTML =
+document.getElementById("msg").innerHTML =
 "❌ Wrong Username or Password";
 
 }
@@ -99,5 +91,4 @@ document.getElementById("msg")
 </script>
 
 </body>
-
 </html>

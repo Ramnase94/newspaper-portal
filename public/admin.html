@@ -21,6 +21,16 @@
    <button class="logout-btn" onclick="logout()">
 Logout
 </button>
+
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
+
+<button class="change-btn" onclick="showPasswordForm()">
+🔑 Change Password
+</button>
+
+
 </div>
 <div class="main-content">
 
@@ -76,7 +86,38 @@ function logout(){
 
 </script>
 
+<div id="passwordSection" class="upload-card" style="display:none;">
 
+<h2>🔑 Change Password</h2>
+
+<input type="password"
+id="oldPassword"
+placeholder="Current Password">
+
+<br><br>
+
+<input type="password"
+id="newPassword"
+placeholder="New Password">
+
+<br><br>
+
+<input type="password"
+id="confirmPassword"
+placeholder="Confirm Password">
+
+<br><br>
+
+<button class="upload-btn"
+onclick="changePassword()">
+
+Update Password
+
+</button>
+
+<p id="passMsg"></p>
+
+</div>
 
 <div class="container">
 
@@ -398,6 +439,62 @@ async function deleteNews(id){
 
 
 loadNews();
+
+
+
+
+
+
+
+function showPasswordForm(){
+
+document.getElementById(
+"passwordSection"
+).style.display="block";
+
+}
+
+async function changePassword(){
+
+let oldPassword =
+document.getElementById("oldPassword").value;
+
+let newPassword =
+document.getElementById("newPassword").value;
+
+let confirmPassword =
+document.getElementById("confirmPassword").value;
+
+if(newPassword !== confirmPassword){
+
+document.getElementById("passMsg").innerHTML =
+"❌ Password Not Match";
+
+return;
+
+}
+
+let res = await fetch("/change-password",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+oldPassword,
+newPassword
+})
+});
+
+let data = await res.json();
+
+document.getElementById("passMsg").innerHTML =
+data.message;
+
+}
+
+
+
+
 
 
 </script>

@@ -342,7 +342,22 @@ body{
 }
 
 
+.change-btn{
+    position:fixed;
+    top:20px;
+    right:150px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
+.change-btn:hover{
+    background:#1d4ed8;
+}
 
 
 

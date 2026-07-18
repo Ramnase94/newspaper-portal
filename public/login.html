@@ -29,12 +29,29 @@
             placeholder="👤 Username">
         </div>
 
-        <div class="input-group">
+      <!--  <div class="input-group">
             <input
             type="password"
             id="password"
             placeholder="🔒 Password">
-        </div>
+        </div>-->
+
+
+<div class="password-box">
+
+    <input
+    type="password"
+    id="password"
+    placeholder="Password">
+
+    <span
+    class="show-pass"
+    onclick="togglePassword()">
+    👁
+    </span>
+
+</div>
+
 
         <button onclick="login()">
             LOGIN
@@ -85,6 +102,26 @@ document.getElementById("msg").innerHTML =
 "❌ Wrong Username or Password";
 
 }
+
+}
+
+
+
+
+function togglePassword(){
+
+    let pass =
+    document.getElementById("password");
+
+    if(pass.type === "password"){
+
+        pass.type = "text";
+
+    }else{
+
+        pass.type = "password";
+
+    }
 
 }
 

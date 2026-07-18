@@ -748,6 +748,29 @@ font-size:22px;
 }
 
 
+.password-box{
+    position:relative;
+    width:100%;
+}
+
+.password-box input{
+    width:100%;
+    padding:15px;
+    padding-right:50px;
+}
+
+.show-pass{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:20px;
+}
+
+
+
+
 /*==== footer ====*/
 .footer{
     background:linear-gradient(135deg,#111827,#1f2937);

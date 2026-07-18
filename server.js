@@ -5,28 +5,17 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-
 const app = express();
-
 const PORT = process.env.PORT || 3000;
-
 
 // Middleware
 
 app.use(cors());
-
 app.use(express.json());
-
-app.use(express.urlencoded({
-    extended:true
-}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
-
-app.use("/uploads",
-express.static("uploads"));
-
-
+app.use("/uploads", express.static("uploads"));
 
 // File location
 
@@ -36,10 +25,9 @@ const newsFile = path.join(
     "newspapers.json"
 );
 
-
 // Read JSON
 
-function readNews(){
+function readNews() {
 
     return JSON.parse(
         fs.readFileSync(newsFile)
@@ -47,243 +35,217 @@ function readNews(){
 
 }
 
-
 // Save JSON
 
-function saveNews(data){
-
-    console.log("Saving To:");
-    console.log(newsFile);
+function saveNews(data) {
 
     fs.writeFileSync(
         newsFile,
-        JSON.stringify(data,null,2)
+        JSON.stringify(data, null, 2)
     );
-
-    console.log("JSON Saved Successfully");
 
 }
 
+// =====================
+// ADMIN LOGIN
+// =====================
 
+app.post("/login", (req, res) => {
 
-// Admin Login
+    const { username, password } = req.body;
 
-app.post("/login",(req,res)=>{
-
-    const {
-        username,
-        password
-    } = req.body;
-
-
-    const users =
-    JSON.parse(
-        fs.readFileSync(
-        "./data/users.json"
-        )
+    const users = JSON.parse(
+        fs.readFileSync("./data/users.json")
     );
 
-
-    const user =
-    users.find(
+    const user = users.find(
         u =>
-        u.username===username &&
-        u.password===password
+            u.username === username &&
+            u.password === password
     );
 
-
-    if(user){
+    if (user) {
 
         res.json({
-            success:true
+            success: true
+        });
+
+    } else {
+
+        res.json({
+            success: false
         });
 
     }
-    else{
 
-        res.json({
-            success:false
+});
+app.get("/test", (req,res)=>{
+res.send("TEST OK");
+});
+// =====================
+// CHANGE PASSWORD
+// =====================
+
+app.post("/change-password", (req, res) => {
+
+    const { oldPassword, newPassword } = req.body;
+
+    let users = JSON.parse(
+        fs.readFileSync("./data/users.json")
+    );
+
+    if (users[0].password !== oldPassword) {
+
+        return res.json({
+            message: "❌ Current Password Wrong"
         });
 
     }
 
+    users[0].password = newPassword;
 
-});
-
-
-
-
-// Upload PDF
-
-
-const storage =
-multer.diskStorage({
-
-destination:(req,file,cb)=>{
-
-    cb(null,"uploads");
-
-},
-
-
-filename:(req,file,cb)=>{
-
-    cb(null,
-    Date.now()+"-"+file.originalname);
-
-}
-
-});
-
-
-const upload =
-multer({
-    storage:storage
-});
-
-
-
-
-
-app.post("/upload",
-upload.single("pdf"),
-(req,res)=>{
-
-
-    let news =
-    readNews();
-
-console.log(req.body);
-
-   let item={
-
-    id:uuidv4(),
-
-    newspaper:
-    req.body.newspaper,
-
-    category:
-    req.body.category,
-
-    rni:
-    req.body.rni,
-
-    owner:
-    req.body.owner,
-
-    mobile:
-    req.body.mobile,
-
-    email:
-    req.body.email,
-
-    editor:
-req.body.editor,
-
-publisher:
-req.body.publisher,
-
-volume:
-req.body.volume,
-
-issue:
-req.body.issue,
-
-    pdf:
-    req.file.filename,
-
-    date:
-    new Date()
-
-};
-
-
-
-    news.push(item);
-    saveNews(news);
-
-    console.log(news);
-
+    fs.writeFileSync(
+        "./data/users.json",
+        JSON.stringify(users, null, 2)
+    );
 
     res.json({
-        message:"PDF Uploaded Successfully"
+        message: "✅ Password Updated Successfully"
     });
 
+});
+
+// =====================
+// PDF UPLOAD
+// =====================
+
+const storage = multer.diskStorage({
+
+    destination: (req, file, cb) => {
+
+        cb(null, "uploads");
+
+    },
+
+    filename: (req, file, cb) => {
+
+        cb(
+            null,
+            Date.now() + "-" + file.originalname
+        );
+
+    }
 
 });
 
+const upload = multer({
+    storage: storage
+});
 
+// =====================
+// UPLOAD ROUTE
+// =====================
 
+app.post(
+    "/upload",
+    upload.single("pdf"),
+    (req, res) => {
 
+        let news = readNews();
 
-// Display Newspaper
+        let item = {
 
+            id: uuidv4(),
 
-app.get("/newspapers",
-(req,res)=>{
+            newspaper: req.body.newspaper,
+            category: req.body.category,
 
-let news = readNews();
+            rni: req.body.rni,
+            owner: req.body.owner,
+            mobile: req.body.mobile,
+            email: req.body.email,
 
-news.sort((a,b)=>
-new Date(b.date)-new Date(a.date)
+            editor: req.body.editor,
+            publisher: req.body.publisher,
+
+            volume: req.body.volume,
+            issue: req.body.issue,
+
+            pdf: req.file.filename,
+
+            date: new Date()
+
+        };
+
+        news.push(item);
+
+        saveNews(news);
+
+        res.json({
+            message: "PDF Uploaded Successfully"
+        });
+
+    }
 );
 
-let category =
-req.query.category;
+// =====================
+// GET NEWSPAPERS
+// =====================
 
-if(category){
+app.get("/newspapers", (req, res) => {
 
-news = news.filter(
-n => n.category === category
-);
+    let news = readNews();
 
-}
+    news.sort(
+        (a, b) =>
+            new Date(b.date) -
+            new Date(a.date)
+    );
 
-res.json(news);
+    let category =
+        req.query.category;
+
+    if (category) {
+
+        news = news.filter(
+            n => n.category === category
+        );
+
+    }
+
+    res.json(news);
 
 });
 
+// =====================
+// DELETE NEWSPAPER
+// =====================
 
+app.delete("/delete/:id", (req, res) => {
 
+    let news = readNews();
 
-// Delete PDF
+    news = news.filter(
+        n => n.id !== req.params.id
+    );
 
+    saveNews(news);
 
-app.delete(
-"/delete/:id",
-(req,res)=>{
-
-
-let news =
-readNews();
-
-
-news =
-news.filter(
-n=>n.id!==req.params.id
-);
-
-
-saveNews(news);
-
-
-res.json({
-message:"Deleted"
-});
-
+    res.json({
+        message: "Deleted Successfully"
+    });
 
 });
 
+// =====================
+// SERVER START
+// =====================
 
 
+app.listen(PORT, () => {
 
-
-app.listen(PORT,()=>{
-
-console.log(
-`Server running at http://localhost:${PORT}`
-);
-
-
+    console.log(
+        `Server running at http://localhost:${PORT}`
+    );
 
 });
